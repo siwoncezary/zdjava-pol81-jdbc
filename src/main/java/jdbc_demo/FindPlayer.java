@@ -13,10 +13,11 @@ public class FindPlayer {
         Scanner scanner = new Scanner(System.in);
         String playerName = scanner.nextLine();
         try (
-                Connection connection = JdbcConnection.connect();
+                Connection connection = JdbcConnection.connect("jdbc:mysql://localhost/kurs81?allowMultiQueries=true", "root", "1234");
                 Statement statement = connection.createStatement();
         ) {
-            //JdbcConnection.createAndInsertPlayers(statement);
+
+            JdbcConnection.createAndInsertPlayers(statement);
             //UWAGA!!! SQLInjection
             ResultSet set = statement.executeQuery("SELECT * FROM players WHERE name = " + playerName);
             while(set.next()){
